@@ -1,0 +1,32 @@
+kind: pipeline
+type: docker
+name: drone-demo
+
+steps:
+- name: install
+  image: node
+  commands:
+  - npm install
+  - npm run build
+ 
+- name: doker build && push 
+  image: plugins/docker
+  command:
+  - docker run build askary/drone-demo:{{build.number}} .
+  # settings:
+  #   registry: https://hub.docker.com/
+  #   epo: askary/drone-demo
+  #   use_cache: true
+  #   username: username
+  #   assword: password
+  #   auto_tag: true # 自动打tag
+    # 也可以用下面这个手动指定
+    # tags:
+    # - latest
+    # - 0.0.1
+  # when:     ## 可以指定触发条件
+  #   event: push
+  #   branch: master
+  #   status:
+  #   - failure
+  #   - success
