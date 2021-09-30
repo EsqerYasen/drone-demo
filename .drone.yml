@@ -21,7 +21,7 @@ steps:
   dockerfile: Dockerfile
   settings:
     auto_tag: true
-    repo: drone/drone
+    repo: askary/drone-demo
 
   # settings:
   #   registry: https://hub.docker.com/
