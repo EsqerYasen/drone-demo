@@ -8,11 +8,21 @@ steps:
   commands:
   - npm install
   - npm run build
- 
-- name: doker build && push 
+  
+- name: publish
   image: plugins/docker:18
-  command:
-  - docker run build askary/drone-demo:{{build.number}} .
+  resources:
+    requests:
+      cpu: 500
+      memory: 400MiB
+    limits:
+      cpu: 1000
+      memory: 400MiB
+  dockerfile: Dockerfile
+  settings:
+    auto_tag: true
+    repo: drone/drone
+
   # settings:
   #   registry: https://hub.docker.com/
   #   epo: askary/drone-demo
